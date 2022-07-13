@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 
-function Square(props) {
+function Square(props: SquareProps) {
     return (
         <button className='square' onClick={props.onClick}>
             {props.value}
@@ -10,9 +10,19 @@ function Square(props) {
     );
 }
 
-class Board extends React.Component {
-    renderSquare(i) {
-        return <Square value={this.props.squares[i]} onClick={() => this.props.onClick(i)} />;
+type SquareProps = {
+	value: string | null
+	onClick: any
+}
+
+type BoardProps = {
+	squares: Array<SquareType>
+	onClick: (i: number) => void
+}
+
+class Board extends React.Component<BoardProps> {
+    renderSquare(i: number) {
+        return <Square value={this.props.squares![i]} onClick={() => this.props.onClick(i)} />;
     }
 
     render() {
@@ -38,9 +48,21 @@ class Board extends React.Component {
     }
 }
 
-class Game extends React.Component {
+type SquareType = 'O' | 'X' | null;
+
+type HistoryData = {
+  squares: Array<SquareType>;
+}
+
+type GameState = {
+  history: HistoryData[];
+  xIsNext: boolean;
+  stepNumber: number
+}
+
+class Game extends React.Component<{}, GameState> {
     // ゲームの戦歴をステートで管理したい
-    constructor(props) {
+    constructor(props: {}) {
         super(props);
         this.state = {
             history: [
@@ -53,14 +75,14 @@ class Game extends React.Component {
         };
     }
 
-    jumpTo(step) {
+    jumpTo(step: number) {
         this.setState({
             stepNumber: step,
             xIsNext: step % 2 === 0,
         });
     }
 
-    handleClick(i) {
+    handleClick(i: number) {
         // ヒストリーから参照した後の手順を上書きする
         const history = this.state.history.slice(0, this.state.stepNumber + 1);
         const current = history[history.length - 1];
@@ -117,7 +139,7 @@ class Game extends React.Component {
     }
 }
 
-function calculateWinner(squares) {
+function calculateWinner(squares: Array<SquareType>) {
     const lines = [
         [0, 1, 2],
         [3, 4, 5],
@@ -139,5 +161,5 @@ function calculateWinner(squares) {
 
 // ========================================
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById("root")!);
 root.render(<Game />);
