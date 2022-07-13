@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
+import { SquareProps, BoardProps, GameState, SquareType } from './types';
 
 function Square(props: SquareProps) {
     return (
@@ -8,16 +9,6 @@ function Square(props: SquareProps) {
             {props.value}
         </button>
     );
-}
-
-type SquareProps = {
-	value: string | null
-	onClick: any
-}
-
-type BoardProps = {
-	squares: Array<SquareType>
-	onClick: (i: number) => void
 }
 
 class Board extends React.Component<BoardProps> {
@@ -46,18 +37,6 @@ class Board extends React.Component<BoardProps> {
             </div>
         );
     }
-}
-
-type SquareType = 'O' | 'X' | null;
-
-type HistoryData = {
-  squares: Array<SquareType>;
-}
-
-type GameState = {
-  history: HistoryData[];
-  xIsNext: boolean;
-  stepNumber: number
 }
 
 class Game extends React.Component<{}, GameState> {
