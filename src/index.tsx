@@ -1,44 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { Board } from './board';
 import { calculateWinner } from './calc_winner';
 import "./index.css";
-import { SquareProps, BoardProps, GameState } from './types';
-
-function Square(props: SquareProps) {
-    return (
-        <button className='square' onClick={props.onClick}>
-            {props.value}
-        </button>
-    );
-}
-
-class Board extends React.Component<BoardProps> {
-    renderSquare(i: number) {
-        return <Square value={this.props.squares![i]} onClick={() => this.props.onClick(i)} />;
-    }
-
-    render() {
-        return (
-            <div>
-                <div className='board-row'>
-                    {this.renderSquare(0)}
-                    {this.renderSquare(1)}
-                    {this.renderSquare(2)}
-                </div>
-                <div className='board-row'>
-                    {this.renderSquare(3)}
-                    {this.renderSquare(4)}
-                    {this.renderSquare(5)}
-                </div>
-                <div className='board-row'>
-                    {this.renderSquare(6)}
-                    {this.renderSquare(7)}
-                    {this.renderSquare(8)}
-                </div>
-            </div>
-        );
-    }
-}
+import { GameState } from './types';
 
 class Game extends React.Component<{}, GameState> {
     // ゲームの戦歴をステートで管理したい
