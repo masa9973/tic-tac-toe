@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Board } from './board';
-import { calculateWinner } from './calc_winner';
-import "./index.css";
+import { calculateWinner } from './functions/calc_winner';
+import "./style/index.css";
 import { GameState } from './types';
 
 class Game extends React.Component<{}, GameState> {

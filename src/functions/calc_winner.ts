@@ -1,4 +1,4 @@
-import { SquareType } from "./types";
+import { SquareType } from "../types";
 
 export function calculateWinner(squares: Array<SquareType>) {
     const lines = [
