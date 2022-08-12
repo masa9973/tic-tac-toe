@@ -7,6 +7,7 @@ import { GameState } from './types';
 
 class Game extends React.Component<{}, GameState> {
     // ゲームの戦歴をステートで管理したい
+    // ここにコメントを追加
     constructor(props: {}) {
         super(props);
         this.state = {
